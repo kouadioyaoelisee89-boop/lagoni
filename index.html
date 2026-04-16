@@ -1161,13 +1161,12 @@ body.dark .nav-lbl-rose{background:rgba(212,84,122,.12);color:var(--rose2);}
       <div class="nav-item" id="nav-onglerie" onclick="showPage('onglerie',this)"><span>💅</span>Onglerie</div>
     </div>
 
-    <!-- Section Dossiers (gerante only) -->
+    <!-- Section Stock (gerante only) -->
     <div class="sb-section g-only">
       <div class="nav-lbl">Stock</div>
-      <div class="nav-item" id="nav-dossiers" onclick="showPage('dossiers',this)"><span>📦</span>Stock</div>
-      <!-- Dossiers rapides dynamiques -->
+      <div class="nav-item" id="nav-dossiers" onclick="showPage('dossiers',this)"><span>🗂️</span>Stock</div>
+      <!-- Stock rapides dynamiques -->
       <div id="sidebar-dossiers-list"></div>
-      <div class="nav-item" id="nav-inventaire" onclick="showPage('inventaire',this)"><span>📋</span>Inventaire</div>
       <div class="nav-item" id="nav-ajouter" onclick="showPage('ajouter',document.getElementById('nav-ajouter'))"><span>➕</span>Ajouter un article</div>
       <div class="nav-item" id="nav-fournisseurs" onclick="showPage('fournisseurs',this)"><span>📇</span>Annuaire fournisseurs</div>
     </div>
@@ -1259,7 +1258,7 @@ body.dark .nav-lbl-rose{background:rgba(212,84,122,.12);color:var(--rose2);}
           <div class="fg"><label>Nom de l'article</label><input type="text" id="f-nom" placeholder="ex: Mèche brésilienne 18p"/></div>
           <div class="fg"><label>Prix de vente / unité (FCFA)</label><input type="number" id="f-vente" min="0" placeholder="0" oninput="calcProfitAdd()"/></div>
           <div class="fg"><label>📅 Date de mise en stock</label><input type="date" id="f-datestock"/></div>
-          <div class="fg"><label>🗂️ Dossier (optionnel)</label><select id="f-dossier"><option value="">— Aucun dossier —</option></select></div>
+          <div class="fg"><label>🗂️ Dossier (optionnel)</label><select id="f-dossier"><option value="">— Aucun stock —</option></select></div>
           <div class="fg"><label>Note</label><input type="text" id="f-note" placeholder="Bestseller, promo..."/></div>
           <div class="fg full">
             <label>Couleur</label>
@@ -1892,17 +1891,17 @@ body.dark .nav-lbl-rose{background:rgba(212,84,122,.12);color:var(--rose2);}
       <div class="empty-state" id="messages-empty" style="display:none;"><div class="ei">💬</div><div class="et">Aucun message</div></div>
     </div>
 
-    <!-- DOSSIERS -->
+    <!-- STOCK -->
     <div id="page-dossiers" class="page">
       <div id="dos-list-view">
         <div class="page-hdr">
-          <div class="page-title">🗂️ Dossiers de stock</div>
-          <button class="btn btn-primary" onclick="ouvrirModalDossier()">➕ Nouveau dossier</button>
+          <div class="page-title">🗂️ Stock</div>
+          <button class="btn btn-primary" onclick="ouvrirModalDossier()">➕ Nouveau stock</button>
         </div>
         <div id="dossiers-grid" class="dossiers-grid"></div>
       </div>
 
-      <!-- Vue intérieure d'un dossier -->
+      <!-- Vue intérieure d'un stock -->
       <div id="dos-detail-view" style="display:none;">
         <div class="page-hdr" style="margin-bottom:10px;">
           <button class="btn btn-ghost btn-sm" onclick="fermerDossier()">← Retour</button>
@@ -1911,10 +1910,10 @@ body.dark .nav-lbl-rose{background:rgba(212,84,122,.12);color:var(--rose2);}
             <button class="btn btn-danger btn-sm" id="dos-del-btn" onclick="delCurrentDossier()">🗑️</button>
           </div>
         </div>
-        <!-- Header dossier -->
+        <!-- Header stock -->
         <div id="dos-detail-header"></div>
 
-        <!-- Onglets dossier -->
+        <!-- Onglets stock -->
         <div class="dos-tabs" id="dos-tabs">
           <button class="dos-tab active" onclick="setDosTab('dashboard',this)">📊 Dashboard</button>
           <button class="dos-tab" onclick="setDosTab('inventaire',this)">📦 Inventaire</button>
@@ -1940,7 +1939,7 @@ body.dark .nav-lbl-rose{background:rgba(212,84,122,.12);color:var(--rose2);}
         <div id="dos-tab-inventaire" class="dos-tab-content" style="display:none;">
           <div class="card">
             <div class="card-title" style="display:flex;align-items:center;justify-content:space-between;">
-              <span>Articles du dossier</span>
+              <span>Articles du stock</span>
               <button class="btn btn-primary btn-sm" onclick="showPage('ajouter',document.getElementById('nav-ajouter'))">➕ Ajouter un article</button>
             </div>
             <div class="filter-bar" style="margin-bottom:10px;">
@@ -2368,16 +2367,16 @@ body.dark .nav-lbl-rose{background:rgba(212,84,122,.12);color:var(--rose2);}
   </div>
 </div>
 
-<!-- MODAL DOSSIER -->
+<!-- MODAL STOCK -->
 <div class="modal-bg" id="modal-dossier" onclick="if(event.target===this)closeModalDossier()">
   <div class="modal" style="max-width:460px;">
-    <div class="modal-title" id="modal-dossier-title">🗂️ Nouveau dossier</div>
+    <div class="modal-title" id="modal-dossier-title">🗂️ Nouveau stock</div>
     <div class="fgrid">
-      <div class="fg full"><label>Nom du dossier</label><input type="text" id="dos-f-nom" placeholder="ex: Collection Été 2025, Promo Fête..."/></div>
+      <div class="fg full"><label>Nom du stock</label><input type="text" id="dos-f-nom" placeholder="ex: Collection Été 2025, Promo Fête..."/></div>
       <div class="fg full"><label>Description</label><input type="text" id="dos-f-desc" placeholder="ex: Articles en promotion pour la rentrée"/></div>
       <div class="fg"><label>Icône</label>
         <select id="dos-f-ico">
-          <option value="🗂️">🗂️ Dossier</option><option value="👗">👗 Vêtements</option>
+          <option value="🗂️">🗂️ Stock</option><option value="👗">👗 Vêtements</option>
           <option value="💄">💄 Cosmétiques</option><option value="👜">👜 Sacs</option>
           <option value="👠">👠 Chaussures</option><option value="💍">💍 Bijoux</option>
           <option value="🧴">🧴 Soins</option><option value="💇">💇 Cheveux</option>
@@ -2409,8 +2408,8 @@ body.dark .nav-lbl-rose{background:rgba(212,84,122,.12);color:var(--rose2);}
       <div class="fg"><label>Stock disponible</label><input type="number" id="e-qty" min="0"/></div>
       <div class="fg"><label>Prix achat/u (FCFA)</label><input type="number" id="e-achat" oninput="calcEditP()"/></div>
       <div class="fg"><label>Prix vente/u (FCFA)</label><input type="number" id="e-vente" oninput="calcEditP()"/></div>
-      <div class="fg full"><label>🗂️ Dossier</label>
-        <select id="e-dossier"><option value="">— Aucun dossier —</option></select>
+      <div class="fg full"><label>🗂️ Stock</label>
+        <select id="e-dossier"><option value="">— Aucun stock —</option></select>
       </div>
       <div class="fg"><label>Note</label><input type="text" id="e-note"/></div>
     </div>
@@ -2633,308 +2632,6 @@ body.dark .nav-lbl-rose{background:rgba(212,84,122,.12);color:var(--rose2);}
       </button>
     </div>
   </div>
-</div>
-
-<!-- ══════════════════════════════════════════════════════
-     PAGE INVENTAIRE
-     ══════════════════════════════════════════════════════ -->
-<div id="page-inventaire" class="page g-only">
-
-  <!-- EN-TÊTE PAGE -->
-  <div class="page-hdr" style="margin-bottom:12px;">
-    <div class="page-title">📋 Inventaire <small id="inv-subtitle">Cochez chaque article vérifié</small></div>
-    <div style="display:flex;gap:8px;flex-wrap:wrap;">
-      <button class="btn btn-ghost" onclick="invToggleAll(false)" style="font-size:11px;padding:6px 11px;">☐ Tout décocher</button>
-      <button class="btn btn-ghost" onclick="invToggleAll(true)" style="font-size:11px;padding:6px 11px;">☑ Tout cocher</button>
-      <button class="btn btn-gold" onclick="invExportPDF()">📄 PDF</button>
-    </div>
-  </div>
-
-  <!-- INFOS DOCUMENT -->
-  <div class="card" style="margin-bottom:14px;">
-    <div class="card-title">Informations du document</div>
-    <div class="fgrid">
-      <div class="fg"><label>Date d'inventaire</label><input type="date" id="inv-meta-date"/></div>
-      <div class="fg"><label>Responsable</label><input type="text" id="inv-meta-resp" placeholder="Nom de la responsable"/></div>
-      <div class="fg"><label>Boutique / Dossier</label><input type="text" id="inv-meta-boutique" placeholder="ex : Boutique Principale"/></div>
-      <div class="fg"><label>Référence</label><input type="text" id="inv-meta-ref" placeholder="ex : INV-2025-04"/></div>
-      <div class="fg full"><label>Observations</label><input type="text" id="inv-meta-obs" placeholder="Notes générales…"/></div>
-    </div>
-  </div>
-
-  <!-- SECTIONS PAR CATÉGORIE (dynamique) -->
-  <div id="inv-sections"></div>
-
-  <!-- SIGNATURES -->
-  <div class="card" style="margin-top:8px;margin-bottom:14px;">
-    <div class="card-title">Signatures</div>
-    <div style="display:grid;grid-template-columns:1fr 1fr;gap:18px;">
-      <div>
-        <div style="font-size:10px;font-weight:700;text-transform:uppercase;letter-spacing:.8px;color:var(--grey);margin-bottom:5px;">Responsable inventaire</div>
-        <div style="height:48px;border-bottom:1.5px solid var(--border);margin-bottom:4px;"></div>
-        <div style="font-size:10px;color:var(--grey);">Nom &amp; signature</div>
-      </div>
-      <div>
-        <div style="font-size:10px;font-weight:700;text-transform:uppercase;letter-spacing:.8px;color:var(--grey);margin-bottom:5px;">Gérante / Superviseure</div>
-        <div style="height:48px;border-bottom:1.5px solid var(--border);margin-bottom:4px;"></div>
-        <div style="font-size:10px;color:var(--grey);">Nom &amp; signature</div>
-      </div>
-    </div>
-  </div>
-
-  <!-- ═══ PANNEAU DE BAS DE PAGE : PROGRESSION + COMPTEUR FINANCIER ═══ -->
-  <div id="inv-bottom-panel" style="position:sticky;bottom:0;z-index:50;background:linear-gradient(135deg,var(--dark),#2A0820);border-radius:18px 18px 0 0;padding:14px 18px 18px;box-shadow:0 -8px 32px rgba(0,0,0,.28);margin-left:-20px;margin-right:-20px;">
-
-    <!-- Barre de progression -->
-    <div style="display:flex;align-items:center;gap:12px;margin-bottom:12px;">
-      <div style="font-size:11px;font-weight:700;color:rgba(255,255,255,.5);white-space:nowrap;text-transform:uppercase;letter-spacing:.8px;">Progression</div>
-      <div style="flex:1;height:7px;background:rgba(255,255,255,.1);border-radius:100px;overflow:hidden;">
-        <div id="inv-fill" style="height:100%;background:linear-gradient(90deg,var(--rose),var(--gold));border-radius:100px;width:0%;transition:width .5s cubic-bezier(.4,0,.2,1);"></div>
-      </div>
-      <div style="white-space:nowrap;text-align:right;">
-        <span id="inv-pct" style="color:var(--rose2);font-size:16px;font-weight:800;">0%</span>
-        <span style="color:rgba(255,255,255,.35);font-size:11px;margin-left:4px;">(<span id="inv-num">0/0</span>)</span>
-      </div>
-    </div>
-
-    <!-- Compteurs principaux -->
-    <div style="display:flex;gap:0;flex-wrap:nowrap;justify-content:space-between;margin-bottom:14px;overflow-x:auto;">
-      <div class="inv-kpi-cell">
-        <div class="inv-kpi-ico">📦</div>
-        <div class="inv-kpi-val" id="inv-k-total">0</div>
-        <div class="inv-kpi-lbl">Total</div>
-      </div>
-      <div class="inv-kpi-sep"></div>
-      <div class="inv-kpi-cell">
-        <div class="inv-kpi-ico">✅</div>
-        <div class="inv-kpi-val" id="inv-k-coches" style="color:#7DEAAA;">0</div>
-        <div class="inv-kpi-lbl">Vérifiés</div>
-      </div>
-      <div class="inv-kpi-sep"></div>
-      <div class="inv-kpi-cell">
-        <div class="inv-kpi-ico">🟢</div>
-        <div class="inv-kpi-val" id="inv-k-ok" style="color:var(--gold);">0</div>
-        <div class="inv-kpi-lbl">En stock</div>
-      </div>
-      <div class="inv-kpi-sep"></div>
-      <div class="inv-kpi-cell">
-        <div class="inv-kpi-ico">🟡</div>
-        <div class="inv-kpi-val" id="inv-k-low" style="color:#FFD080;">0</div>
-        <div class="inv-kpi-lbl">Stock bas</div>
-      </div>
-      <div class="inv-kpi-sep"></div>
-      <div class="inv-kpi-cell">
-        <div class="inv-kpi-ico">🔴</div>
-        <div class="inv-kpi-val" id="inv-k-out" style="color:#FF8080;">0</div>
-        <div class="inv-kpi-lbl">Épuisés</div>
-      </div>
-    </div>
-
-    <!-- Séparateur -->
-    <div style="height:1px;background:rgba(255,255,255,.08);margin-bottom:12px;"></div>
-
-    <!-- Synthèse financière en 2 blocs -->
-    <div style="display:grid;grid-template-columns:1fr 1fr;gap:10px;">
-
-      <!-- Bloc Épuisés (vendus) -->
-      <div class="inv-fin-bloc inv-fin-red">
-        <div class="inv-fin-titre">❌ Articles vendus (épuisés)</div>
-        <div class="inv-fin-row">
-          <span class="inv-fin-lbl">Articles</span>
-          <span class="inv-fin-val" id="inv-f-out-count">0</span>
-        </div>
-        <div class="inv-fin-row">
-          <span class="inv-fin-lbl">Coût d'achat</span>
-          <span class="inv-fin-val" id="inv-f-out-achat">0 FCFA</span>
-        </div>
-        <div class="inv-fin-row">
-          <span class="inv-fin-lbl">Prix de vente</span>
-          <span class="inv-fin-val" id="inv-f-out-vente">0 FCFA</span>
-        </div>
-        <div class="inv-fin-row inv-fin-total">
-          <span class="inv-fin-lbl">Bénéfice réalisé</span>
-          <span class="inv-fin-val" id="inv-f-out-benef" style="color:#FFD080;">0 FCFA</span>
-        </div>
-      </div>
-
-      <!-- Bloc En stock -->
-      <div class="inv-fin-bloc inv-fin-green">
-        <div class="inv-fin-titre">✅ Articles en stock</div>
-        <div class="inv-fin-row">
-          <span class="inv-fin-lbl">Articles</span>
-          <span class="inv-fin-val" id="inv-f-stk-count">0</span>
-        </div>
-        <div class="inv-fin-row">
-          <span class="inv-fin-lbl">Coût d'achat</span>
-          <span class="inv-fin-val" id="inv-f-stk-achat">0 FCFA</span>
-        </div>
-        <div class="inv-fin-row">
-          <span class="inv-fin-lbl">Prix de vente</span>
-          <span class="inv-fin-val" id="inv-f-stk-vente">0 FCFA</span>
-        </div>
-        <div class="inv-fin-row inv-fin-total">
-          <span class="inv-fin-lbl">Bénéfice potentiel</span>
-          <span class="inv-fin-val" id="inv-f-stk-benef" style="color:#7DEAAA;">0 FCFA</span>
-        </div>
-      </div>
-
-    </div>
-  </div><!-- /inv-bottom-panel -->
-
-</div><!-- /page-inventaire -->
-
-<!-- STYLES INVENTAIRE -->
-<style>
-/* ── ITEM ROW INVENTAIRE ── */
-.inv-row {
-  display:flex;align-items:center;gap:11px;
-  padding:10px 6px;border-bottom:1px solid var(--grey-light);
-  cursor:pointer;border-radius:8px;transition:background .13s;
-}
-.inv-row:last-child{border-bottom:none;}
-.inv-row:hover{background:var(--rose-light);}
-.inv-row.inv-checked{background:var(--green-light);}
-.inv-row.inv-checked .inv-name{text-decoration:line-through;color:var(--grey);}
-
-.inv-checkbox {
-  width:22px;height:22px;border-radius:6px;
-  border:2px solid var(--border);background:#fff;
-  display:flex;align-items:center;justify-content:center;
-  flex-shrink:0;transition:all .18s;position:relative;
-}
-.inv-row.inv-checked .inv-checkbox{background:var(--green);border-color:var(--green);}
-.inv-checkbox::after{
-  content:'';width:6px;height:10px;
-  border:2px solid #fff;border-top:none;border-left:none;
-  transform:rotate(45deg) scale(0);
-  transition:transform .18s cubic-bezier(.34,1.56,.64,1);
-  margin-top:-2px;
-}
-.inv-row.inv-checked .inv-checkbox::after{transform:rotate(45deg) scale(1);}
-
-.inv-dot{width:10px;height:10px;border-radius:50%;border:1px solid rgba(0,0,0,.12);flex-shrink:0;}
-.inv-name{flex:1;font-size:13px;font-weight:500;color:var(--dark);}
-.inv-code{font-size:10px;color:var(--grey);font-weight:700;letter-spacing:.4px;}
-
-.inv-stock-chip{font-size:10px;font-weight:700;padding:3px 8px;border-radius:100px;white-space:nowrap;}
-.inv-stock-ok{background:var(--green-light);color:var(--green);}
-.inv-stock-low{background:#FFF3E0;color:var(--gold-dark);}
-.inv-stock-out{background:var(--red-light);color:var(--red);}
-
-.inv-qty-input{
-  width:64px;padding:5px 7px;
-  border:1.5px solid var(--border);border-radius:8px;
-  font-family:'Outfit',sans-serif;font-size:12px;
-  text-align:center;color:var(--dark);background:#fff;
-  outline:none;flex-shrink:0;transition:border-color .15s;
-}
-.inv-qty-input:focus{border-color:var(--rose);}
-.inv-note-input{
-  width:120px;padding:5px 8px;
-  border:1.5px solid var(--border);border-radius:8px;
-  font-family:'Outfit',sans-serif;font-size:11px;
-  color:var(--dark);background:#fff;
-  outline:none;flex-shrink:0;transition:border-color .15s;
-}
-.inv-note-input:focus{border-color:var(--rose);}
-.inv-note-input::placeholder{color:rgba(122,94,106,.4);}
-
-/* Cat header */
-.inv-cat-hdr{
-  display:flex;align-items:center;justify-content:space-between;
-  padding:12px 16px;cursor:pointer;
-  background:linear-gradient(135deg,var(--dark),#2A0820);
-  user-select:none;transition:opacity .18s;gap:10px;
-}
-.inv-cat-hdr:hover{opacity:.9;}
-.inv-cat-name{font-family:'Cormorant Garamond',serif;font-size:17px;color:#fff;}
-.inv-cat-badge{font-size:11px;color:rgba(255,255,255,.45);background:rgba(255,255,255,.08);padding:3px 9px;border-radius:100px;font-weight:600;}
-.inv-cat-chev{color:rgba(255,255,255,.5);font-size:13px;transition:transform .25s;}
-.inv-section.inv-collapsed .inv-cat-chev{transform:rotate(-90deg);}
-.inv-cat-body{padding:0 14px;max-height:9999px;transition:max-height .35s ease,padding .25s;overflow:hidden;}
-.inv-section.inv-collapsed .inv-cat-body{max-height:0;padding-top:0;padding-bottom:0;}
-
-/* ── KPI BOTTOM CELLS ── */
-.inv-kpi-cell{display:flex;flex-direction:column;align-items:center;min-width:52px;padding:0 4px;}
-.inv-kpi-ico{font-size:15px;margin-bottom:3px;}
-.inv-kpi-val{font-size:18px;font-weight:800;color:#fff;font-variant-numeric:tabular-nums;line-height:1;}
-.inv-kpi-lbl{font-size:9px;color:rgba(255,255,255,.35);text-transform:uppercase;letter-spacing:.6px;margin-top:3px;white-space:nowrap;}
-.inv-kpi-sep{width:1px;background:rgba(255,255,255,.08);align-self:stretch;margin:4px 2px;}
-
-/* ── ANIMATION COMPTEUR ── */
-@keyframes invCountPop{
-  0%{transform:scale(1.5) translateY(-4px);opacity:0;}
-  60%{transform:scale(1.1);}
-  100%{transform:scale(1);opacity:1;}
-}
-.inv-kpi-val.animating{animation:invCountPop .35s cubic-bezier(.34,1.56,.64,1);}
-
-/* ── BLOCS FINANCIERS ── */
-.inv-fin-bloc{border-radius:12px;padding:11px 13px;display:flex;flex-direction:column;gap:6px;}
-.inv-fin-red{background:rgba(212,64,64,.15);border:1px solid rgba(212,64,64,.25);}
-.inv-fin-green{background:rgba(58,168,118,.15);border:1px solid rgba(58,168,118,.25);}
-.inv-fin-titre{font-size:11px;font-weight:700;color:rgba(255,255,255,.65);margin-bottom:4px;text-transform:uppercase;letter-spacing:.5px;}
-.inv-fin-row{display:flex;justify-content:space-between;align-items:center;gap:6px;}
-.inv-fin-lbl{font-size:10px;color:rgba(255,255,255,.4);}
-.inv-fin-val{font-size:11px;font-weight:700;color:#fff;text-align:right;font-variant-numeric:tabular-nums;}
-.inv-fin-total{border-top:1px solid rgba(255,255,255,.1);margin-top:3px;padding-top:6px;}
-.inv-fin-total .inv-fin-lbl{font-weight:700;color:rgba(255,255,255,.55);}
-.inv-fin-total .inv-fin-val{font-size:12px;}
-
-/* ── ANIMATION FINANCIÈRE ── */
-@keyframes invFinPop{
-  0%{opacity:0;transform:translateY(3px);}
-  100%{opacity:1;transform:none;}
-}
-.inv-fin-val.animating{animation:invFinPop .4s ease both;}
-
-/* PRINT INVENTAIRE */
-@media print {
-  #page-inventaire .page-hdr .btn,
-  #inv-bottom-panel,
-  #inv-meta-date,#inv-meta-resp,#inv-meta-boutique,#inv-meta-ref,#inv-meta-obs,
-  .inv-qty-input,.inv-note-input { display:none!important; }
-
-  .inv-row:hover{background:transparent!important;}
-  .inv-cat-hdr{background:#12060E!important;padding:7px 14px!important;}
-  .inv-cat-name{font-size:14px!important;}
-  .inv-cat-chev{display:none;}
-  .inv-section.inv-collapsed .inv-cat-body{max-height:9999px!important;padding:0 14px!important;}
-  .inv-row{padding:6px 4px;}
-  .inv-name{font-size:11px!important;}
-  .inv-stock-chip{font-size:9px!important;padding:2px 6px!important;}
-
-  /* Show print values */
-  .inv-print-val{display:inline!important;}
-  .inv-print-qty{display:inline!important;font-size:10px;font-weight:700;color:#12060E;}
-  .inv-print-note{display:inline!important;font-size:10px;color:#7A5E6A;}
-}
-.inv-print-val,.inv-print-qty,.inv-print-note{display:none;}
-
-/* Print header spécifique inventaire */
-@media print {
-  #inv-print-header{display:flex!important;}
-  #inv-print-footer{display:flex!important;}
-}
-#inv-print-header,#inv-print-footer{display:none;}
-</style>
-
-<!-- PRINT HEADER INVENTAIRE (only visible in print) -->
-<div id="inv-print-header" style="align-items:center;justify-content:space-between;border-bottom:2px solid #D4547A;padding-bottom:10px;margin-bottom:14px;">
-  <div>
-    <div style="font-family:'Cormorant Garamond',serif;font-size:24px;color:#12060E;">Lagoni <span style="color:#D4547A;font-style:italic;">Boutique</span></div>
-    <div style="font-size:10px;color:#7A5E6A;margin-top:2px;text-transform:uppercase;letter-spacing:1.5px;">Fiche d'Inventaire Officielle</div>
-  </div>
-  <div style="text-align:right;font-size:10px;color:#7A5E6A;">
-    <div id="inv-ph-date" style="font-weight:700;font-size:12px;color:#12060E;"></div>
-    <div id="inv-ph-ref" style="margin-top:2px;"></div>
-    <div id="inv-ph-resp" style="margin-top:2px;"></div>
-  </div>
-</div>
-<div id="inv-print-footer" style="justify-content:space-between;font-size:9px;color:#7A5E6A;border-top:1px solid #EDE4E9;padding-top:7px;margin-top:14px;">
-  <span>Lagoni Boutique — Fiche d'Inventaire</span>
-  <span id="inv-pf-date"></span>
-  <span>Document confidentiel</span>
 </div>
 
 <script>
@@ -3485,7 +3182,7 @@ function showPage(name, el){
     // Peupler le select dossiers
     const sel=document.getElementById('f-dossier');
     if(sel){
-      sel.innerHTML='<option value="">— Aucun dossier —</option>';
+      sel.innerHTML='<option value="">— Aucun stock —</option>';
       dossiers.forEach(d=>{const o=document.createElement('option');o.value=d.id;o.textContent=d.ico+' '+d.nom;sel.appendChild(o);});
       // Pré-sélectionner le dossier courant si on vient d'un dossier
       if(currentDossierId) sel.value=currentDossierId;
@@ -3843,7 +3540,7 @@ function openEdit(id){
   // Dossier selector
   const edosSel=document.getElementById('e-dossier');
   if(edosSel){
-    edosSel.innerHTML='<option value="">— Aucun dossier —</option>';
+    edosSel.innerHTML='<option value="">— Aucun stock —</option>';
     dossiers.forEach(d=>{const o=document.createElement('option');o.value=d.id;o.textContent=d.ico+' '+d.nom;edosSel.appendChild(o);});
     edosSel.value=p.dossierId||'';
   }
@@ -6180,7 +5877,7 @@ function ouvrirModalDossier(id){
   var titre=document.getElementById('modal-dossier-title');
   if(id){
     var d=dossiers.find(function(x){return x.id===id;});if(!d)return;
-    titre.textContent='✏️ Modifier le dossier';
+    titre.textContent='✏️ Modifier le stock';
     document.getElementById('dos-f-nom').value=d.nom||'';
     document.getElementById('dos-f-desc').value=d.desc||'';
     document.getElementById('dos-f-ico').value=d.ico||'🗂️';
@@ -6188,7 +5885,7 @@ function ouvrirModalDossier(id){
     document.getElementById('dos-f-date').value=d.date||'';
     document.getElementById('dos-f-note').value=d.note||'';
   } else {
-    titre.textContent='🗂️ Nouveau dossier';
+    titre.textContent='🗂️ Nouveau stock';
     ['dos-f-nom','dos-f-desc','dos-f-note'].forEach(function(i){var e=document.getElementById(i);if(e)e.value='';});
     var ico=document.getElementById('dos-f-ico');if(ico)ico.value='🗂️';
     var col=document.getElementById('dos-f-color');if(col)col.value='#D4547A';
@@ -6200,7 +5897,7 @@ function closeModalDossier(){document.getElementById('modal-dossier').classList.
 
 function saveDossier(){
   var nom=(document.getElementById('dos-f-nom').value||'').trim();
-  if(!nom){showToast('⚠️','Saisissez un nom de dossier');return;}
+  if(!nom){showToast('⚠️','Saisissez un nom de stock');return;}
   var data={nom:nom,desc:(document.getElementById('dos-f-desc').value||'').trim(),ico:document.getElementById('dos-f-ico').value||'🗂️',color:document.getElementById('dos-f-color').value||'#D4547A',date:document.getElementById('dos-f-date').value||today(),note:(document.getElementById('dos-f-note').value||'').trim()};
   if(editingDossierId){
     var idx=dossiers.findIndex(function(x){return x.id===editingDossierId;});
@@ -6213,12 +5910,12 @@ function saveDossier(){
   renderSidebarDossiers();
   if(navigator.vibrate)navigator.vibrate(60);
   if(currentDossierId)ouvrirDossier(currentDossierId);else renderDossiers();
-  showToast('✅',editingDossierId?'Dossier modifié !':'Dossier créé !');
+  showToast('✅',editingDossierId?'Stock modifié !':'Stock créé !');
 }
 
 function renderDossiers(){
   var grid=document.getElementById('dossiers-grid');if(!grid)return;
-  var addBtn='<div class="dossier-card dos-add-btn" onclick="ouvrirModalDossier()"><div class="dos-add-ico">➕</div><div class="dos-add-txt">Nouveau dossier</div></div>';
+  var addBtn='<div class="dossier-card dos-add-btn" onclick="ouvrirModalDossier()"><div class="dos-add-ico">➕</div><div class="dos-add-txt">Nouveau stock</div></div>';
   if(!dossiers.length){grid.innerHTML='<div class="dossier-card dos-add-btn" onclick="ouvrirModalDossier()"><div class="dos-add-ico">🗂️</div><div class="dos-add-txt">Créer un premier dossier</div></div>';return;}
   grid.innerHTML=dossiers.map(function(d){
     var dosProds=products.filter(function(p){return p.dossierId===d.id;});
@@ -6280,7 +5977,7 @@ function delCurrentDossier(){
 
 
 /* ══════════════════════════════════════════
-   DOSSIER — TABS, DASHBOARD, INVENTAIRE, STATS, HISTORIQUE
+   STOCK — TABS, DASHBOARD, INVENTAIRE, STATS, HISTORIQUE
 ══════════════════════════════════════════ */
 var currentDosTab='dashboard';
 var dosInvFilter='tous';
@@ -6477,7 +6174,7 @@ function setDosHistFilter(f,el){
 }
 
 /* ══════════════════════════════════════
-   DOSSIER — DÉPENSES & FINANCES
+   STOCK — DÉPENSES & FINANCES
 ══════════════════════════════════════ */
 let dosDepenses = LS('lb5_dos_depenses') || []; // [{id, dossierId, label, montant, cat, date, note}]
 
@@ -7335,7 +7032,7 @@ function genererRapportJournalier(silencieux){
     const p=products.find(x=>x.id===v.prodId);
     if(p&&p.dossierId){
       const d=dossiers.find(x=>x.id===p.dossierId);
-      const key=d?d.nom:'Dossier inconnu';
+      const key=d?d.nom:'Stock inconnu';
       if(!dosSalesMap[key])dosSalesMap[key]={dos:d,items:[],ca:0,benef:0};
       dosSalesMap[key].items.push(v);
       dosSalesMap[key].ca+=v.total;
@@ -10538,1102 +10235,6 @@ self.addEventListener('fetch', e => {
   }
 })();
 
-/* ══════════════════════════════════════════════════════════════════════════════
-   MODULE INVENTAIRE — Fiche de contrôle stock + Rapport PDF jsPDF
-   ══════════════════════════════════════════════════════════════════════════════ */
-
-/* ── Numérotation automatique des inventaires ── */
-function _invGenRef() {
-  var stored = _readUnified('lb5_inv_counter') || 0;
-  var next = stored + 1;
-  _writeUnified('lb5_inv_counter', next);
-  var y = new Date().getFullYear();
-  var m = String(new Date().getMonth() + 1).padStart(2, '0');
-  return 'INV-' + y + m + '-' + String(next).padStart(4, '0');
-}
-
-/* État cochés + notes + qtés */
-let _invState = {};
-let _invCurrentRef = null;
-
-function renderInventaire() {
-  if (!products) return;
-  products.forEach(function(p) {
-    if (!_invState[p.id]) _invState[p.id] = { checked: false, qty: p.qtyLeft, note: '' };
-  });
-
-  /* Affecter le numéro si pas encore fait */
-  if (!_invCurrentRef) {
-    _invCurrentRef = _invGenRef();
-    var refEl = document.getElementById('inv-meta-ref');
-    if (refEl && !refEl.value) refEl.value = _invCurrentRef;
-  }
-
-  var bycat = {};
-  products.forEach(function(p) {
-    var cat = p.cat || 'Autre';
-    if (!bycat[cat]) bycat[cat] = [];
-    bycat[cat].push(p);
-  });
-
-  var CE_INV = {'Mèches / Extensions':'💇','Pommades / Soins':'🧴','Sac à main':'👜','Lingerie':'🩱','Bijoux / Accessoires':'💍','Cosmétiques / Maquillage':'💄','Talon / Chaussures':'👠','Parfumerie':'🌸','Autre':'🛍️'};
-  var wrap = document.getElementById('inv-sections');
-  if (!wrap) return;
-
-  if (!products.length) {
-    wrap.innerHTML = '<div class="card" style="text-align:center;padding:32px;color:var(--grey);font-size:14px;">Aucun article dans le catalogue.<br><small>Ajoutez des articles depuis "Ajouter un article".</small></div>';
-    _invUpdateProgress();
-    return;
-  }
-
-  wrap.innerHTML = Object.entries(bycat).map(function(e2) {
-    var cat = e2[0], items = e2[1];
-    var checkedCount = items.filter(function(p){ return _invState[p.id] && _invState[p.id].checked; }).length;
-    var ico = CE_INV[cat] || '🛍️';
-    var rows = items.map(function(p) {
-      var st = _invState[p.id] || {};
-      var isChecked = !!st.checked;
-      var stockCls = 'inv-stock-ok', stockLbl = '📦 ' + p.qtyLeft;
-      if (p.qtyLeft <= 0) { stockCls = 'inv-stock-out'; stockLbl = 'Epuise'; }
-      else if (p.qtyLeft <= 2) { stockCls = 'inv-stock-low'; stockLbl = 'Bas: ' + p.qtyLeft; }
-      var qtyVal = (st.qty !== undefined) ? st.qty : p.qtyLeft;
-      var noteVal = (st.note || '').replace(/"/g, '&quot;');
-      return '<div class="inv-row' + (isChecked ? ' inv-checked' : '') + '" id="inv-row-' + p.id + '" onclick="invToggleRow(' + p.id + ',event)">'
-        + '<div class="inv-checkbox"></div>'
-        + '<div class="inv-dot" style="background:' + (p.color || '#D4547A') + '"></div>'
-        + '<div class="inv-name">' + p.nom + (p.colorName ? '<span style="font-size:10px;color:var(--grey);font-weight:400;"> · ' + p.colorName + '</span>' : '') + '</div>'
-        + (p.prodCode ? '<div class="inv-code">' + p.prodCode + '</div>' : '')
-        + '<div class="inv-stock-chip ' + stockCls + '">' + stockLbl + '</div>'
-        + '<input class="inv-qty-input" type="number" min="0" value="' + qtyVal + '" placeholder="Qte" title="Quantite comptee" onclick="event.stopPropagation()" oninput="invSetQty(' + p.id + ',this.value)" />'
-        + '<input class="inv-note-input" type="text" value="' + noteVal + '" placeholder="Note" title="Remarque" onclick="event.stopPropagation()" oninput="invSetNote(' + p.id + ',this.value)" />'
-        + '</div>';
-    }).join('');
-    return '<div class="inv-section card" id="inv-sec-' + cat.replace(/[^a-z0-9]/gi,'_') + '" style="padding:0;overflow:hidden;margin-bottom:14px;">'
-      + '<div class="inv-cat-hdr" onclick="invToggleCat(this)">'
-      + '<div style="display:flex;align-items:center;gap:9px;"><span style="font-size:19px;">' + ico + '</span><span class="inv-cat-name">' + cat + '</span><span class="inv-cat-badge">' + checkedCount + '/' + items.length + '</span></div>'
-      + '<span class="inv-cat-chev">&#9662;</span>'
-      + '</div>'
-      + '<div class="inv-cat-body" style="padding:0 14px;">' + rows + '</div>'
-      + '</div>';
-  }).join('');
-
-  _invUpdateProgress();
-}
-
-function invToggleRow(id, e) {
-  if (e && (e.target.tagName === 'INPUT')) return;
-  if (!_invState[id]) _invState[id] = {};
-  _invState[id].checked = !_invState[id].checked;
-  var row = document.getElementById('inv-row-' + id);
-  if (row) row.classList.toggle('inv-checked', _invState[id].checked);
-  _invUpdateProgress();
-}
-function invSetQty(id, val) { if (!_invState[id]) _invState[id] = {}; _invState[id].qty = parseInt(val) || 0; }
-function invSetNote(id, val) { if (!_invState[id]) _invState[id] = {}; _invState[id].note = val; }
-function invToggleCat(hdrEl) { hdrEl.closest('.inv-section').classList.toggle('inv-collapsed'); }
-function invToggleAll(checked) {
-  products.forEach(function(p) {
-    if (!_invState[p.id]) _invState[p.id] = {};
-    _invState[p.id].checked = checked;
-    var row = document.getElementById('inv-row-' + p.id);
-    if (row) row.classList.toggle('inv-checked', checked);
-  });
-  _invUpdateProgress();
-}
-
-/* Animation compteur individuel */
-function _invAnimateCounter(id, newVal) {
-  var el = document.getElementById(id);
-  if (!el) return;
-  var prev = el.textContent;
-  if (prev === String(newVal)) return;
-  el.textContent = newVal;
-  el.classList.remove('animating');
-  void el.offsetWidth; // reflow
-  el.classList.add('animating');
-  setTimeout(function(){ el.classList.remove('animating'); }, 400);
-}
-
-/* Animation valeur financière */
-function _invAnimateFin(id, newVal) {
-  var el = document.getElementById(id);
-  if (!el) return;
-  if (el.textContent === newVal) return;
-  el.textContent = newVal;
-  el.classList.remove('animating');
-  void el.offsetWidth;
-  el.classList.add('animating');
-  setTimeout(function(){ el.classList.remove('animating'); }, 500);
-}
-
-function _fmtFCFA(n) {
-  return n.toLocaleString('fr-FR') + ' FCFA';
-}
-
-function _invUpdateProgress() {
-  if (!products) return;
-  var total   = products.length;
-  var checked = products.filter(function(p){ return _invState[p.id] && _invState[p.id].checked; }).length;
-  var pct     = total ? Math.round(checked / total * 100) : 0;
-  var ok      = products.filter(function(p){ return p.qtyLeft > 2; }).length;
-  var low     = products.filter(function(p){ return p.qtyLeft > 0 && p.qtyLeft <= 2; }).length;
-  var out     = products.filter(function(p){ return p.qtyLeft <= 0; }).length;
-
-  /* Barre progression */
-  var fill = document.getElementById('inv-fill');
-  var pctEl = document.getElementById('inv-pct');
-  var numEl = document.getElementById('inv-num');
-  if (fill)  fill.style.width = pct + '%';
-  if (pctEl) pctEl.textContent = pct + '%';
-  if (numEl) numEl.textContent = checked + '/' + total;
-
-  /* Compteurs animés */
-  _invAnimateCounter('inv-k-total', total);
-  _invAnimateCounter('inv-k-coches', checked);
-  _invAnimateCounter('inv-k-ok', ok);
-  _invAnimateCounter('inv-k-low', low);
-  _invAnimateCounter('inv-k-out', out);
-
-  /* ── Calculs financiers ── */
-  var epuises = products.filter(function(p){ return p.qtyLeft <= 0; });
-  var enStock = products.filter(function(p){ return p.qtyLeft > 0; });
-
-  /* Épuisés — on calcule sur la base de la quantité initiale (qty) */
-  var outAchat = 0, outVente = 0;
-  epuises.forEach(function(p){
-    var pa  = parseFloat(p.achat)  || 0;
-    var pv  = parseFloat(p.vente)  || 0;
-    var qty = parseInt(p.qty) || 1;
-    outAchat += pa * qty;
-    outVente += pv * qty;
-  });
-  var outBenef = outVente - outAchat;
-
-  /* En stock — on multiplie par qtyLeft */
-  var stkAchat = 0, stkVente = 0;
-  enStock.forEach(function(p){
-    var pa  = parseFloat(p.achat)  || 0;
-    var pv  = parseFloat(p.vente)  || 0;
-    var qty = parseInt(p.qtyLeft)  || 1;
-    stkAchat += pa * qty;
-    stkVente += pv * qty;
-  });
-  var stkBenef = stkVente - stkAchat;
-
-  /* Mise à jour avec animation */
-  _invAnimateCounter('inv-f-out-count', epuises.length);
-  _invAnimateFin('inv-f-out-achat', _fmtFCFA(outAchat));
-  _invAnimateFin('inv-f-out-vente', _fmtFCFA(outVente));
-  _invAnimateFin('inv-f-out-benef', _fmtFCFA(outBenef));
-
-  _invAnimateCounter('inv-f-stk-count', enStock.length);
-  _invAnimateFin('inv-f-stk-achat', _fmtFCFA(stkAchat));
-  _invAnimateFin('inv-f-stk-vente', _fmtFCFA(stkVente));
-  _invAnimateFin('inv-f-stk-benef', _fmtFCFA(stkBenef));
-}
-
-/* ══════════════════════════════════════════════════
-   GÉNÉRATION PDF RAPPORT — jsPDF
-   ══════════════════════════════════════════════════ */
-function invExportPDF() {
-  if (typeof window.jspdf === 'undefined' && typeof jsPDF === 'undefined') {
-    showToast('⚠️', 'Librairie PDF non chargée, réessayez dans 2s');
-    return;
-  }
-  var jsPDFc = (typeof window.jspdf !== 'undefined') ? window.jspdf.jsPDF : jsPDF;
-
-  /* ── Collecte des données ── */
-  var gv = function(id){ var e=document.getElementById(id); return e ? (e.value||'').trim() : ''; };
-  var dateVal  = gv('inv-meta-date');
-  var resp     = gv('inv-meta-resp')     || (session ? session.name : '—');
-  var boutique = gv('inv-meta-boutique') || 'Lagoni Boutique';
-  var obs      = gv('inv-meta-obs');
-  var ref      = gv('inv-meta-ref') || _invCurrentRef || _invGenRef();
-
-  var fmtDate = dateVal
-    ? new Date(dateVal + 'T12:00:00').toLocaleDateString('fr-FR', {weekday:'long', day:'numeric', month:'long', year:'numeric'})
-    : new Date().toLocaleDateString('fr-FR', {weekday:'long', day:'numeric', month:'long', year:'numeric'});
-  var fmtNow = new Date().toLocaleString('fr-FR', {day:'2-digit', month:'2-digit', year:'numeric', hour:'2-digit', minute:'2-digit'});
-
-  var total   = products.length;
-  var checked = products.filter(function(p){ return _invState[p.id] && _invState[p.id].checked; }).length;
-  var ok      = products.filter(function(p){ return p.qtyLeft > 2; }).length;
-  var low     = products.filter(function(p){ return p.qtyLeft > 0 && p.qtyLeft <= 2; }).length;
-  var out     = products.filter(function(p){ return p.qtyLeft <= 0; }).length;
-  var pct     = total ? Math.round(checked / total * 100) : 0;
-
-  /* Regrouper par catégorie */
-  var bycat = {};
-  products.forEach(function(p){
-    var cat = p.cat || 'Autre';
-    if (!bycat[cat]) bycat[cat] = [];
-    bycat[cat].push(p);
-  });
-
-  /* ── Couleurs palette ── */
-  var C = {
-    dark:   [18,  6,  14],
-    rose:   [212, 84, 122],
-    rose2:  [240,124,160],
-    gold:   [191,146, 68],
-    green:  [58, 168,118],
-    orange: [212,120, 48],
-    red:    [212, 64, 64],
-    white:  [255,255,255],
-    panel:  [249,243,246],
-    grey:   [122, 94,106],
-    border: [221,208,216],
-    light:  [253,238,244]
-  };
-
-  /* ── Helpers ── */
-  var doc = new jsPDFc({ orientation:'portrait', unit:'mm', format:'a4' });
-  var PW = 210, PH = 297;
-  var ML = 14, MR = 14, MT = 0; /* margins */
-  var CW = PW - ML - MR;
-  var pageNum = 1, totalPages = 1; /* updated after */
-  var curY = 0;
-
-  function rgb(c){ return { r:c[0], g:c[1], b:c[2] }; }
-  function setFill(c){ doc.setFillColor(c[0],c[1],c[2]); }
-  function setDraw(c){ doc.setDrawColor(c[0],c[1],c[2]); }
-  function setTxt(c){ doc.setTextColor(c[0],c[1],c[2]); }
-  function hexToRgb(hex){ var r=parseInt(hex.slice(1,3),16),g=parseInt(hex.slice(3,5),16),b=parseInt(hex.slice(5,7),16); return [isNaN(r)?180:r,isNaN(g)?60:g,isNaN(b)?100:b]; }
-
-  function checkNewPage(needed) {
-    if (curY + needed > PH - 20) { addFooter(); doc.addPage(); pageNum++; curY = addHeader(false); }
-  }
-
-  /* ── En-tête de chaque page ── */
-  function addHeader(isFirst) {
-    /* Bandeau sombre haut */
-    setFill(C.dark);
-    doc.rect(0, 0, PW, isFirst ? 52 : 14, 'F');
-
-    if (isFirst) {
-      /* Bande rose décorative */
-      setFill(C.rose);
-      doc.rect(0, 52, PW, 3, 'F');
-      /* Logo */
-      setTxt(C.white);
-      doc.setFont('helvetica','bold');
-      doc.setFontSize(26);
-      doc.text('Lagoni', ML, 22);
-      doc.setFont('helvetica','italic');
-      doc.setFontSize(26);
-      setTxt(C.rose2);
-      doc.text(' Boutique', ML + doc.getTextWidth('Lagoni'), 22);
-      /* Sous-titre */
-      setTxt([200,180,190]);
-      doc.setFont('helvetica','normal');
-      doc.setFontSize(8);
-      doc.text('RAPPORT D\'INVENTAIRE OFFICIEL', ML, 30);
-      /* Numéro de référence — encadré doré */
-      setFill(C.gold);
-      doc.roundedRect(PW - MR - 52, 8, 52, 16, 2, 2, 'F');
-      setTxt(C.dark);
-      doc.setFont('helvetica','bold');
-      doc.setFontSize(7);
-      doc.text('REFERENCE', PW - MR - 26, 14, {align:'center'});
-      doc.setFontSize(9);
-      doc.text(ref, PW - MR - 26, 20, {align:'center'});
-
-      /* Bloc infos sous le bandeau */
-      var infoY = 58;
-      /* Date */
-      setTxt(C.grey);
-      doc.setFont('helvetica','normal');
-      doc.setFontSize(7.5);
-      doc.text('DATE D\'INVENTAIRE', ML, infoY);
-      setTxt(C.dark);
-      doc.setFont('helvetica','bold');
-      doc.setFontSize(9);
-      doc.text(fmtDate, ML, infoY + 5);
-      /* Responsable */
-      doc.setFont('helvetica','normal');
-      doc.setFontSize(7.5);
-      setTxt(C.grey);
-      doc.text('RESPONSABLE', ML + 80, infoY);
-      setTxt(C.dark);
-      doc.setFont('helvetica','bold');
-      doc.setFontSize(9);
-      doc.text(resp, ML + 80, infoY + 5);
-      /* Boutique */
-      doc.setFont('helvetica','normal');
-      doc.setFontSize(7.5);
-      setTxt(C.grey);
-      doc.text('BOUTIQUE', ML + 145, infoY);
-      setTxt(C.dark);
-      doc.setFont('helvetica','bold');
-      doc.setFontSize(9);
-      doc.text(boutique, ML + 145, infoY + 5);
-
-      /* Ligne séparatrice */
-      setDraw(C.border);
-      doc.setLineWidth(0.3);
-      doc.line(ML, infoY + 9, PW - MR, infoY + 9);
-
-      return infoY + 16;
-    } else {
-      /* En-tête pages suivantes — bande mini */
-      setTxt(C.white);
-      doc.setFont('helvetica','bold');
-      doc.setFontSize(8);
-      doc.text('Lagoni Boutique  —  ' + ref, ML, 9);
-      setTxt(C.rose2);
-      doc.setFont('helvetica','italic');
-      doc.setFontSize(8);
-      setFill(C.rose);
-      doc.rect(0, 14, PW, 0.8, 'F');
-      return 20;
-    }
-  }
-
-  function addFooter() {
-    var fy = PH - 10;
-    setDraw(C.border);
-    doc.setLineWidth(0.3);
-    doc.line(ML, fy - 4, PW - MR, fy - 4);
-    setTxt(C.grey);
-    doc.setFont('helvetica','normal');
-    doc.setFontSize(7);
-    doc.text('Lagoni Boutique  —  Document confidentiel  —  ' + ref, ML, fy);
-    doc.text('Page ' + pageNum + '  |  Imprime le ' + fmtNow, PW - MR, fy, {align:'right'});
-  }
-
-  /* ══════════════════════════════════════════
-     PAGE 1 — Entête + KPIs + Observations
-  ══════════════════════════════════════════ */
-  curY = addHeader(true);
-
-  /* ── KPI Résumé ── */
-  var kpis = [
-    { label:'Total articles', val: String(total), color: C.dark },
-    { label:'Verifies',       val: String(checked) + ' (' + pct + '%)', color: C.green },
-    { label:'En stock',       val: String(ok),  color: C.gold },
-    { label:'Stock bas',      val: String(low), color: C.orange },
-    { label:'Epuises',        val: String(out), color: C.red },
-  ];
-  var kpiW = CW / kpis.length;
-  kpis.forEach(function(k, i) {
-    var kx = ML + i * kpiW;
-    /* Carte fond */
-    setFill(C.panel);
-    doc.roundedRect(kx, curY, kpiW - 2, 18, 2, 2, 'F');
-    /* Barre couleur gauche */
-    setFill(k.color);
-    doc.roundedRect(kx, curY, 2.5, 18, 1, 1, 'F');
-    /* Valeur */
-    setTxt(k.color);
-    doc.setFont('helvetica','bold');
-    doc.setFontSize(13);
-    doc.text(k.val, kx + kpiW/2, curY + 9, {align:'center'});
-    /* Label */
-    setTxt(C.grey);
-    doc.setFont('helvetica','normal');
-    doc.setFontSize(6.5);
-    doc.text(k.label.toUpperCase(), kx + kpiW/2, curY + 15, {align:'center'});
-  });
-  curY += 24;
-
-  /* Barre progression */
-  var barH = 5, barW = CW;
-  setFill(C.border);
-  doc.roundedRect(ML, curY, barW, barH, 2, 2, 'F');
-  if (pct > 0) {
-    setFill(C.rose);
-    doc.roundedRect(ML, curY, barW * pct / 100, barH, 2, 2, 'F');
-  }
-  setTxt(C.grey);
-  doc.setFont('helvetica','normal');
-  doc.setFontSize(7);
-  doc.text('Progression de verification : ' + pct + '%  (' + checked + '/' + total + ' articles coches)', ML, curY + barH + 4);
-  curY += barH + 10;
-
-  /* Observations si présentes */
-  if (obs) {
-    setFill([255,249,240]);
-    doc.roundedRect(ML, curY, CW, 14, 2, 2, 'F');
-    setFill(C.gold);
-    doc.roundedRect(ML, curY, 3, 14, 1, 1, 'F');
-    setTxt(C.gold);
-    doc.setFont('helvetica','bold');
-    doc.setFontSize(7);
-    doc.text('OBSERVATIONS', ML + 6, curY + 5);
-    setTxt(C.dark);
-    doc.setFont('helvetica','normal');
-    doc.setFontSize(8);
-    var obsLines = doc.splitTextToSize(obs, CW - 10);
-    doc.text(obsLines[0], ML + 6, curY + 10);
-    curY += 20;
-  }
-
-  /* Ligne de séparation */
-  setDraw(C.border);
-  doc.setLineWidth(0.3);
-  doc.line(ML, curY, PW - MR, curY);
-  curY += 6;
-
-  /* ══════════════════════════════════════════
-     TABLEAU DES ARTICLES PAR CATÉGORIE
-  ══════════════════════════════════════════ */
-  var COL = { check:6, code:22, nom:64, couleur:26, qtyStock:18, qtyCom:18, statut:16, note:0 };
-  COL.note = CW - COL.check - COL.code - COL.nom - COL.couleur - COL.qtyStock - COL.qtyCom - COL.statut;
-  var colX = {
-    check:   ML,
-    code:    ML + COL.check,
-    nom:     ML + COL.check + COL.code,
-    couleur: ML + COL.check + COL.code + COL.nom,
-    qtyStock:ML + COL.check + COL.code + COL.nom + COL.couleur,
-    qtyCom:  ML + COL.check + COL.code + COL.nom + COL.couleur + COL.qtyStock,
-    statut:  ML + COL.check + COL.code + COL.nom + COL.couleur + COL.qtyStock + COL.qtyCom,
-    note:    ML + COL.check + COL.code + COL.nom + COL.couleur + COL.qtyStock + COL.qtyCom + COL.statut
-  };
-
-  function drawTableHeader(y) {
-    setFill(C.dark);
-    doc.rect(ML, y, CW, 7, 'F');
-    setTxt(C.white);
-    doc.setFont('helvetica','bold');
-    doc.setFontSize(6.5);
-    var hdrs = [
-      { x: colX.check + COL.check/2,   t:'OK',       a:'center' },
-      { x: colX.code + 1,              t:'CODE',     a:'left'   },
-      { x: colX.nom + 1,               t:'ARTICLE',  a:'left'   },
-      { x: colX.couleur + 1,           t:'COULEUR',  a:'left'   },
-      { x: colX.qtyStock + COL.qtyStock/2, t:'QTE SYS', a:'center' },
-      { x: colX.qtyCom  + COL.qtyCom/2,   t:'QTE COM', a:'center' },
-      { x: colX.statut + COL.statut/2,    t:'STATUT',  a:'center' },
-      { x: colX.note + 1,             t:'NOTES',    a:'left'   }
-    ];
-    hdrs.forEach(function(h){ doc.text(h.t, h.x, y + 4.8, {align: h.a}); });
-    return y + 7;
-  }
-
-  function drawCategoryHeader(cat, ico_txt, nbItems, y) {
-    checkNewPage(12);
-    /* Fond dégradé simulé — deux rects */
-    setFill(C.rose);
-    doc.roundedRect(ML, y, CW, 9, 2, 2, 'F');
-    setTxt(C.white);
-    doc.setFont('helvetica','bold');
-    doc.setFontSize(10);
-    doc.text(ico_txt + '  ' + cat, ML + 4, y + 6);
-    /* Badge nb articles */
-    setFill([255,255,255,0.2]);
-    setTxt([255,220,235]);
-    doc.setFont('helvetica','normal');
-    doc.setFontSize(7.5);
-    doc.text(nbItems + ' article' + (nbItems>1?'s':''), PW - MR - 2, y + 6, {align:'right'});
-    return y + 9;
-  }
-
-  function drawRow(p, rowIdx, y) {
-    var st = _invState[p.id] || {};
-    var isChecked = !!st.checked;
-    var rowH = 7;
-
-    /* Alternance fond */
-    if (rowIdx % 2 === 0) {
-      setFill(C.panel);
-      doc.rect(ML, y, CW, rowH, 'F');
-    }
-
-    /* Case à cocher */
-    setDraw(C.border);
-    doc.setLineWidth(0.4);
-    doc.roundedRect(colX.check + 0.5, y + 1.5, 4, 4, 0.8, 0.8);
-    if (isChecked) {
-      setFill(C.green);
-      doc.roundedRect(colX.check + 0.5, y + 1.5, 4, 4, 0.8, 0.8, 'F');
-      setTxt(C.white);
-      doc.setFont('helvetica','bold');
-      doc.setFontSize(5);
-      doc.text('✓', colX.check + 2.5, y + 5.2, {align:'center'});
-    }
-
-    /* Code */
-    setTxt(C.grey);
-    doc.setFont('helvetica','normal');
-    doc.setFontSize(6.5);
-    doc.text((p.prodCode || '—').slice(0,12), colX.code + 1, y + 4.8);
-
-    /* Nom article */
-    setTxt(isChecked ? C.grey : C.dark);
-    doc.setFont('helvetica', isChecked ? 'normal' : 'bold');
-    doc.setFontSize(7.5);
-    var nomLine = doc.splitTextToSize(p.nom, COL.nom - 3);
-    doc.text(nomLine[0], colX.nom + 1, y + 4.8);
-
-    /* Couleur — point coloré + nom */
-    try {
-      var dotColor = hexToRgb(p.color || '#D4547A');
-      setFill(dotColor);
-      doc.circle(colX.couleur + 2.5, y + 3.8, 1.5, 'F');
-    } catch(e) {}
-    setTxt(C.grey);
-    doc.setFont('helvetica','normal');
-    doc.setFontSize(6.5);
-    var clrTxt = (p.colorName || p.color || '').slice(0,14);
-    doc.text(clrTxt, colX.couleur + 6, y + 4.8);
-
-    /* Qty système */
-    var qtyColor = p.qtyLeft <= 0 ? C.red : (p.qtyLeft <= 2 ? C.orange : C.dark);
-    setTxt(qtyColor);
-    doc.setFont('helvetica','bold');
-    doc.setFontSize(8);
-    doc.text(String(p.qtyLeft), colX.qtyStock + COL.qtyStock/2, y + 4.8, {align:'center'});
-
-    /* Qty comptée */
-    var qc = (st.qty !== undefined) ? st.qty : p.qtyLeft;
-    var diffColor = (qc === p.qtyLeft) ? C.dark : (qc < p.qtyLeft ? C.red : C.green);
-    setTxt(diffColor);
-    doc.setFont('helvetica','bold');
-    doc.setFontSize(8);
-    doc.text(String(qc), colX.qtyCom + COL.qtyCom/2, y + 4.8, {align:'center'});
-
-    /* Statut badge */
-    var badgeTxt, badgeCol;
-    if (p.qtyLeft <= 0)      { badgeTxt = 'EPUISE'; badgeCol = C.red; }
-    else if (p.qtyLeft <= 2) { badgeTxt = 'BAS';    badgeCol = C.orange; }
-    else                      { badgeTxt = 'OK';     badgeCol = C.green; }
-    var bx = colX.statut + COL.statut/2;
-    setFill(badgeCol);
-    doc.roundedRect(bx - 6, y + 1.5, 12, 4, 1, 1, 'F');
-    setTxt(C.white);
-    doc.setFont('helvetica','bold');
-    doc.setFontSize(5.5);
-    doc.text(badgeTxt, bx, y + 4.6, {align:'center'});
-
-    /* Note */
-    if (st.note) {
-      setTxt(C.grey);
-      doc.setFont('helvetica','italic');
-      doc.setFontSize(6.5);
-      var noteLine = doc.splitTextToSize(st.note, COL.note - 2);
-      doc.text(noteLine[0], colX.note + 1, y + 4.8);
-    }
-
-    /* Ligne séparatrice légère */
-    setDraw([230,220,226]);
-    doc.setLineWidth(0.15);
-    doc.line(ML, y + rowH, PW - MR, y + rowH);
-
-    return y + rowH;
-  }
-
-  /* ── Rendu catégories + articles ── */
-  var CAT_ICO_TXT = {'Meches / Extensions':'Meches','Pommades / Soins':'Soins','Sac a main':'Sacs','Lingerie':'Lingerie','Bijoux / Accessoires':'Bijoux','Cosmetiques / Maquillage':'Cosmetiques','Talon / Chaussures':'Chaussures','Parfumerie':'Parfumerie','Autre':'Autre'};
-
-  Object.entries(bycat).forEach(function(entry) {
-    var cat = entry[0], items = entry[1];
-    checkNewPage(25);
-    curY = drawCategoryHeader(cat, CAT_ICO_TXT[cat] || cat, items.length, curY);
-    curY += 1;
-    curY = drawTableHeader(curY);
-    items.forEach(function(p, ri) {
-      checkNewPage(8);
-      curY = drawRow(p, ri, curY);
-    });
-
-    /* Sous-total catégorie */
-    var catChecked = items.filter(function(p){ return _invState[p.id] && _invState[p.id].checked; }).length;
-    var catOut = items.filter(function(p){ return p.qtyLeft <= 0; }).length;
-    checkNewPage(8);
-    setFill([245,238,242]);
-    doc.rect(ML, curY, CW, 6, 'F');
-    setTxt(C.grey);
-    doc.setFont('helvetica','italic');
-    doc.setFontSize(6.5);
-    doc.text('Sous-total  —  ' + catChecked + '/' + items.length + ' verifies  |  ' + catOut + ' epuise(s)', PW - MR - 2, curY + 4, {align:'right'});
-    curY += 10;
-  });
-
-  /* ══════════════════════════════════════════
-     SECTION VÉLOCITÉ DES VENTES
-  ══════════════════════════════════════════ */
-
-  /* Calcul des ventes par produit depuis lb5_sales */
-  var salesData = _readUnified('lb5_sales') || [];
-
-  /* Calcul de la vélocité : nb unités vendues + jours en catalogue */
-  var velocityMap = {};
-  salesData.forEach(function(v) {
-    var key = v.prodId || v.prodNom;
-    if (!velocityMap[key]) {
-      velocityMap[key] = {
-        prodId: v.prodId,
-        nom: v.prodNom || '—',
-        qtyVendue: 0,
-        ca: 0,
-        benef: 0,
-        firstSale: v.ts || Date.now(),
-        lastSale: v.ts || Date.now(),
-        nbTransactions: 0
-      };
-    }
-    velocityMap[key].qtyVendue += (v.qty || 1);
-    velocityMap[key].ca += (v.total || 0);
-    velocityMap[key].benef += (v.benef || 0);
-    velocityMap[key].nbTransactions += 1;
-    if ((v.ts || 0) < velocityMap[key].firstSale) velocityMap[key].firstSale = v.ts;
-    if ((v.ts || 0) > velocityMap[key].lastSale) velocityMap[key].lastSale = v.ts;
-  });
-
-  /* Enrichir avec données produit (dateAjout, cat, qtyLeft) */
-  var velocityList = Object.values(velocityMap).map(function(v) {
-    var prod = products.find(function(p) { return p.id === v.prodId; });
-    var nowTs = Date.now();
-    /* Durée dans le catalogue en jours */
-    var dateAjoutTs = prod && prod.ts ? prod.ts : (prod && prod.dateAjout ? new Date(prod.dateAjout+'T12:00:00').getTime() : v.firstSale);
-    var daysInCat = Math.max(1, Math.round((nowTs - dateAjoutTs) / 86400000));
-    /* Vélocité = unités vendues / jours en catalogue (unités/jour) */
-    var velocite = v.qtyVendue / daysInCat;
-    /* Jours moyens entre 2 ventes */
-    var joysEntre = v.nbTransactions > 1
-      ? Math.round((v.lastSale - v.firstSale) / (v.nbTransactions - 1) / 86400000)
-      : daysInCat;
-
-    return {
-      nom: v.nom,
-      cat: prod ? (prod.cat || 'Autre') : 'Inconnu',
-      qtyVendue: v.qtyVendue,
-      qtyLeft: prod ? (prod.qtyLeft || 0) : 0,
-      ca: v.ca,
-      benef: v.benef,
-      velocite: velocite,
-      daysInCat: daysInCat,
-      joysEntre: joysEntre,
-      nbTransactions: v.nbTransactions,
-      note: prod && _invState[prod.id] ? (_invState[prod.id].note || '') : ''
-    };
-  });
-
-  /* Tri par vélocité décroissante (du plus rapide au plus lent) */
-  velocityList.sort(function(a, b) { return b.velocite - a.velocite; });
-
-  /* Produits en stock non vendus — ajoutés au bas de la liste */
-  var soldProdIds = new Set(Object.values(velocityMap).map(function(v){ return v.prodId; }));
-  var unsoldProducts = products.filter(function(p) { return !soldProdIds.has(p.id); });
-  unsoldProducts.forEach(function(p) {
-    var dateAjoutTs = p.ts ? p.ts : (p.dateAjout ? new Date(p.dateAjout+'T12:00:00').getTime() : Date.now());
-    var daysInCat = Math.max(1, Math.round((Date.now() - dateAjoutTs) / 86400000));
-    velocityList.push({
-      nom: p.nom,
-      cat: p.cat || 'Autre',
-      qtyVendue: 0,
-      qtyLeft: p.qtyLeft || 0,
-      ca: 0,
-      benef: 0,
-      velocite: 0,
-      daysInCat: daysInCat,
-      joysEntre: daysInCat,
-      nbTransactions: 0,
-      note: _invState[p.id] ? (_invState[p.id].note || '') : ''
-    });
-  });
-
-  if (velocityList.length > 0) {
-    /* ── Titre de section ── */
-    checkNewPage(20);
-    curY += 4;
-    setFill(C.dark);
-    doc.roundedRect(ML, curY, CW, 8, 2, 2, 'F');
-    setFill(C.gold);
-    doc.roundedRect(ML, curY, 4, 8, 2, 2, 'F');
-    setTxt(C.white);
-    doc.setFont('helvetica','bold');
-    doc.setFontSize(10);
-    doc.text('VELOCITE DES VENTES  —  DU PLUS RAPIDE AU PLUS LENT', ML + 8, curY + 5.5);
-    curY += 12;
-
-    /* Légende rapide */
-    setTxt(C.grey);
-    doc.setFont('helvetica','italic');
-    doc.setFontSize(7);
-    doc.text('Classe A (vert) : vente rapide  |  Classe B (or) : vente moderee  |  Classe C (gris) : vente lente  |  Non vendu (rouge)', ML, curY);
-    curY += 6;
-
-    /* ── En-tête tableau vélocité ── */
-    function drawVeloHeader(y) {
-      setFill(C.dark);
-      doc.rect(ML, y, CW, 7, 'F');
-      setTxt(C.white);
-      doc.setFont('helvetica','bold');
-      doc.setFontSize(6);
-      /* Colonnes : Article | Catégorie | Qté vendue | Stock restant | Ventes/jour | J.moy entre ventes | Jours catalogue | Bénéfice | Notes */
-      var VCW = CW;
-      var vc = {
-        nom:     ML,           nomW: 46,
-        cat:     ML + 46,      catW: 28,
-        qvend:   ML + 74,      qvendW: 16,
-        qstock:  ML + 90,      qstockW: 16,
-        veloc:   ML + 106,     velocW: 18,
-        jmoy:    ML + 124,     jmoyW: 18,
-        jcat:    ML + 142,     jcatW: 18,
-        benef:   ML + 160,     benefW: 22,
-        note:    ML + 182,     noteW: CW - 182
-      };
-      [
-        { x: vc.nom    + vc.nomW/2,    t: 'ARTICLE',         a:'center' },
-        { x: vc.cat    + vc.catW/2,    t: 'CATEGORIE',       a:'center' },
-        { x: vc.qvend  + vc.qvendW/2,  t: 'QTE VDU',         a:'center' },
-        { x: vc.qstock + vc.qstockW/2, t: 'STK',             a:'center' },
-        { x: vc.veloc  + vc.velocW/2,  t: 'U/JOUR',          a:'center' },
-        { x: vc.jmoy   + vc.jmoyW/2,   t: 'J.MOY/VTE',       a:'center' },
-        { x: vc.jcat   + vc.jcatW/2,   t: 'J.CATALOGUE',     a:'center' },
-        { x: vc.benef  + vc.benefW/2,  t: 'BENEFICE',        a:'center' },
-        { x: vc.note   + 1,            t: 'NOTES INVENTAIRE', a:'left'  }
-      ].forEach(function(h){ doc.text(h.t, h.x, y + 4.8, {align: h.a}); });
-      return y + 7;
-    }
-
-    /* Colonnes positions mémorisées */
-    var vc = {
-      nom: ML,           nomW: 46,
-      cat: ML + 46,      catW: 28,
-      qvend: ML + 74,    qvendW: 16,
-      qstock: ML + 90,   qstockW: 16,
-      veloc: ML + 106,   velocW: 18,
-      jmoy: ML + 124,    jmoyW: 18,
-      jcat: ML + 142,    jcatW: 18,
-      benef: ML + 160,   benefW: 22,
-      note: ML + 182,    noteW: CW - 182
-    };
-
-    checkNewPage(10);
-    curY = drawVeloHeader(curY);
-
-    var nbVeloAffiche = Math.min(velocityList.length, 80); /* Max 80 lignes */
-    for (var vi = 0; vi < nbVeloAffiche; vi++) {
-      var vp = velocityList[vi];
-      checkNewPage(10);
-
-      var rowH = vp.note ? 10 : 7;
-
-      /* Couleur de ligne selon classe */
-      var rowBg, rankColor, rankLabel;
-      if (vp.qtyVendue === 0) {
-        rowBg = [255,235,235]; rankColor = C.red;    rankLabel = 'C0';
-      } else if (vp.velocite >= 0.3) {
-        rowBg = [234,248,241]; rankColor = C.green;  rankLabel = 'A';
-      } else if (vp.velocite >= 0.05) {
-        rowBg = [253,246,230]; rankColor = C.gold;   rankLabel = 'B';
-      } else {
-        rowBg = [249,243,246]; rankColor = C.grey;   rankLabel = 'C';
-      }
-
-      /* Fond de ligne */
-      if (vi % 2 === 0) {
-        setFill(rowBg);
-        doc.rect(ML, curY, CW, rowH, 'F');
-      }
-
-      /* Badge de classe (couleur sur bord gauche) */
-      setFill(rankColor);
-      doc.rect(ML, curY, 2, rowH, 'F');
-
-      /* Nom article */
-      setTxt(vp.qtyVendue > 0 ? C.dark : C.grey);
-      doc.setFont('helvetica', vp.velocite >= 0.3 ? 'bold' : 'normal');
-      doc.setFontSize(7);
-      var nomTxt = doc.splitTextToSize(vp.nom, vc.nomW - 4);
-      doc.text(nomTxt[0], vc.nom + 3, curY + 4.8);
-
-      /* Catégorie */
-      setTxt(C.grey);
-      doc.setFont('helvetica','normal');
-      doc.setFontSize(6);
-      var catTxt = doc.splitTextToSize(vp.cat, vc.catW - 2);
-      doc.text(catTxt[0], vc.cat + 1, curY + 4.8);
-
-      /* Qté vendue */
-      setTxt(vp.qtyVendue > 0 ? C.green : C.red);
-      doc.setFont('helvetica','bold');
-      doc.setFontSize(7.5);
-      doc.text(String(vp.qtyVendue), vc.qvend + vc.qvendW/2, curY + 4.8, {align:'center'});
-
-      /* Stock restant */
-      var stkColor = vp.qtyLeft <= 0 ? C.red : (vp.qtyLeft <= 2 ? C.orange : C.dark);
-      setTxt(stkColor);
-      doc.setFont('helvetica','bold');
-      doc.setFontSize(7.5);
-      doc.text(String(vp.qtyLeft), vc.qstock + vc.qstockW/2, curY + 4.8, {align:'center'});
-
-      /* Vélocité u/jour */
-      setTxt(rankColor);
-      doc.setFont('helvetica','bold');
-      doc.setFontSize(7);
-      var velocStr = vp.velocite >= 0.1 ? vp.velocite.toFixed(2) : (vp.velocite > 0 ? '<0.1' : '0');
-      doc.text(velocStr, vc.veloc + vc.velocW/2, curY + 4.8, {align:'center'});
-
-      /* Jours moyens entre ventes */
-      setTxt(C.dark);
-      doc.setFont('helvetica','normal');
-      doc.setFontSize(7);
-      var jmoyStr = vp.nbTransactions > 1 ? String(vp.joysEntre) + 'j' : (vp.nbTransactions === 1 ? '1 vte' : '—');
-      doc.text(jmoyStr, vc.jmoy + vc.jmoyW/2, curY + 4.8, {align:'center'});
-
-      /* Jours en catalogue */
-      setTxt(C.grey);
-      doc.setFont('helvetica','normal');
-      doc.setFontSize(7);
-      doc.text(String(vp.daysInCat) + 'j', vc.jcat + vc.jcatW/2, curY + 4.8, {align:'center'});
-
-      /* Bénéfice */
-      setTxt(vp.benef >= 0 ? C.green : C.red);
-      doc.setFont('helvetica','bold');
-      doc.setFontSize(6.5);
-      var benefStr = vp.benef !== 0 ? (vp.benef >= 0 ? '+' : '') + Math.round(vp.benef/1000) + 'k' : '—';
-      doc.text(benefStr, vc.benef + vc.benefW/2, curY + 4.8, {align:'center'});
-
-      /* Note inventaire — mise en valeur si présente */
-      if (vp.note) {
-        /* Fond note */
-        setFill([255,249,230]);
-        doc.roundedRect(vc.note, curY + 1, vc.noteW - 1, rowH - 2, 1, 1, 'F');
-        setTxt([150,110,40]);
-        doc.setFont('helvetica','italic');
-        doc.setFontSize(6.5);
-        var noteTxt = doc.splitTextToSize(vp.note, vc.noteW - 4);
-        doc.text(noteTxt[0], vc.note + 2, curY + (rowH === 10 ? 4 : 4.8));
-        if (noteTxt.length > 1 && rowH === 10) {
-          doc.text(noteTxt[1], vc.note + 2, curY + 8);
-        }
-      }
-
-      /* Ligne séparatrice */
-      setDraw([230,220,226]);
-      doc.setLineWidth(0.15);
-      doc.line(ML, curY + rowH, PW - MR, curY + rowH);
-
-      curY += rowH;
-
-      /* Répéter en-tête toutes les 25 lignes */
-      if ((vi + 1) % 25 === 0 && vi < nbVeloAffiche - 1) {
-        checkNewPage(10);
-        curY = drawVeloHeader(curY);
-      }
-    }
-
-    /* ── Résumé vélocité ── */
-    var nbA = velocityList.filter(function(v){ return v.velocite >= 0.3; }).length;
-    var nbB = velocityList.filter(function(v){ return v.velocite >= 0.05 && v.velocite < 0.3; }).length;
-    var nbC = velocityList.filter(function(v){ return v.velocite > 0 && v.velocite < 0.05; }).length;
-    var nbC0 = velocityList.filter(function(v){ return v.velocite === 0; }).length;
-    var avgJoursCat = velocityList.length > 0
-      ? Math.round(velocityList.reduce(function(s,v){ return s + v.daysInCat; }, 0) / velocityList.length)
-      : 0;
-    var avgJoysVente = velocityList.filter(function(v){ return v.nbTransactions > 1; });
-    var avgDelai = avgJoysVente.length > 0
-      ? Math.round(avgJoysVente.reduce(function(s,v){ return s + v.joysEntre; }, 0) / avgJoysVente.length)
-      : 0;
-
-    checkNewPage(28);
-    curY += 4;
-
-    /* Bandeau résumé 4 KPIs vélocité */
-    var kpiVW = CW / 4;
-    var kpiVData = [
-      { label:'CLASSE A (rapide)', val: String(nbA),  sub: '>= 0.3 u/j', color: C.green },
-      { label:'CLASSE B (modere)', val: String(nbB),  sub: '0.05-0.3 u/j', color: C.gold },
-      { label:'CLASSE C (lent)',   val: String(nbC),  sub: '< 0.05 u/j', color: C.grey },
-      { label:'NON VENDU',         val: String(nbC0), sub: '0 vente', color: C.red }
-    ];
-    kpiVData.forEach(function(k, i) {
-      var kx = ML + i * kpiVW;
-      setFill(C.panel);
-      doc.roundedRect(kx, curY, kpiVW - 2, 18, 2, 2, 'F');
-      setFill(k.color);
-      doc.roundedRect(kx, curY, 2.5, 18, 1, 1, 'F');
-      setTxt(k.color);
-      doc.setFont('helvetica','bold');
-      doc.setFontSize(13);
-      doc.text(k.val, kx + kpiVW/2, curY + 9, {align:'center'});
-      setTxt(C.grey);
-      doc.setFont('helvetica','normal');
-      doc.setFontSize(5.5);
-      doc.text(k.label, kx + kpiVW/2, curY + 13.5, {align:'center'});
-      doc.text(k.sub,   kx + kpiVW/2, curY + 17,   {align:'center'});
-    });
-    curY += 22;
-
-    /* Ligne moyennes */
-    setFill([240,234,248]);
-    doc.roundedRect(ML, curY, CW, 8, 2, 2, 'F');
-    setFill(C.rose);
-    doc.roundedRect(ML, curY, 3, 8, 1, 1, 'F');
-    setTxt(C.dark);
-    doc.setFont('helvetica','bold');
-    doc.setFontSize(7);
-    doc.text('Duree moyenne en catalogue : ' + avgJoursCat + ' jours', ML + 6, curY + 3.5);
-    doc.setFont('helvetica','normal');
-    doc.setFontSize(6.5);
-    if (avgDelai > 0) {
-      doc.text('Intervalle moyen entre 2 ventes : ' + avgDelai + ' jours', ML + 6, curY + 7);
-    }
-    setTxt(C.grey);
-    doc.setFont('helvetica','italic');
-    doc.setFontSize(6.5);
-    doc.text('Classe A >= 0.3 unite/jour | Classe B 0.05-0.3 | Classe C < 0.05 | Calcule sur toutes les ventes enregistrees', PW - MR - 2, curY + 5, {align:'right'});
-    curY += 14;
-  }
-
-  /* ══════════════════════════════════════════
-     SYNTHÈSE FINALE
-  ══════════════════════════════════════════ */
-  checkNewPage(60);
-  curY += 4;
-  setFill(C.dark);
-  doc.roundedRect(ML, curY, CW, 8, 2, 2, 'F');
-  setFill(C.rose);
-  doc.roundedRect(ML, curY, 4, 8, 2, 2, 'F');
-  setTxt(C.white);
-  doc.setFont('helvetica','bold');
-  doc.setFontSize(10);
-  doc.text('SYNTHESE DE L\'INVENTAIRE', ML + 8, curY + 5.5);
-  curY += 12;
-
-  var synthItems = [
-    ['Numero de reference',  ref],
-    ['Date d\'inventaire',   fmtDate],
-    ['Boutique',             boutique],
-    ['Responsable',          resp],
-    ['Total articles references', String(total)],
-    ['Articles verifies',    checked + ' / ' + total + ' (' + pct + '%)'],
-    ['Articles en stock (>2)', String(ok)],
-    ['Articles stock bas (1-2)', String(low)],
-    ['Articles epuises',     String(out)],
-  ];
-
-  /* ── Calculs financiers pour la synthèse PDF ── */
-  var pdfEpuises = products.filter(function(p){ return p.qtyLeft <= 0; });
-  var pdfEnStock = products.filter(function(p){ return p.qtyLeft > 0; });
-
-  var pdfOutAchat = 0, pdfOutVente = 0;
-  pdfEpuises.forEach(function(p){
-    var pa  = parseFloat(p.achat) || 0;
-    var pv  = parseFloat(p.vente) || 0;
-    var qty = parseInt(p.qty) || 1;
-    pdfOutAchat += pa * qty;
-    pdfOutVente += pv * qty;
-  });
-  var pdfOutBenef = pdfOutVente - pdfOutAchat;
-
-  var pdfStkAchat = 0, pdfStkVente = 0;
-  pdfEnStock.forEach(function(p){
-    var pa  = parseFloat(p.achat) || 0;
-    var pv  = parseFloat(p.vente) || 0;
-    var qty = parseInt(p.qtyLeft) || 1;
-    pdfStkAchat += pa * qty;
-    pdfStkVente += pv * qty;
-  });
-  var pdfStkBenef = pdfStkVente - pdfStkAchat;
-
-  function fmtPDF(n){ return n.toLocaleString('fr-FR') + ' FCFA'; }
-
-  synthItems.push(['— Articles vendus (epuises) —', '']);
-  synthItems.push(['Cout d\'achat (vendus)', fmtPDF(pdfOutAchat)]);
-  synthItems.push(['Prix de vente (vendus)', fmtPDF(pdfOutVente)]);
-  synthItems.push(['Benefice realise (vendus)', fmtPDF(pdfOutBenef)]);
-  synthItems.push(['— Articles en stock —', '']);
-  synthItems.push(['Cout d\'achat (stock)', fmtPDF(pdfStkAchat)]);
-  synthItems.push(['Prix de vente (stock)', fmtPDF(pdfStkVente)]);
-  synthItems.push(['Benefice potentiel (stock)', fmtPDF(pdfStkBenef)]);
-
-  if (obs) synthItems.push(['Observations', obs]);
-
-  synthItems.forEach(function(row, i) {
-    /* Lignes de séparation (titres de sous-section) */
-    if (row[1] === '') {
-      checkNewPage(10);
-      curY += 3;
-      setFill(C.dark);
-      doc.rect(ML, curY, CW, 6, 'F');
-      setFill(C.gold);
-      doc.rect(ML, curY, 3, 6, 'F');
-      setTxt(C.white);
-      doc.setFont('helvetica','bold');
-      doc.setFontSize(7);
-      doc.text(row[0], ML + 6, curY + 4.2);
-      curY += 9;
-      return;
-    }
-    checkNewPage(9);
-    if (i % 2 === 0) { setFill(C.panel); doc.rect(ML, curY, CW, 7, 'F'); }
-    setTxt(C.grey);
-    doc.setFont('helvetica','normal');
-    doc.setFontSize(7.5);
-    doc.text(row[0], ML + 4, curY + 4.8);
-    setTxt(C.dark);
-    doc.setFont('helvetica','bold');
-    doc.setFontSize(7.5);
-    doc.text(row[1], PW - MR - 4, curY + 4.8, {align:'right'});
-    setDraw(C.border);
-    doc.setLineWidth(0.15);
-    doc.line(ML, curY + 7, PW - MR, curY + 7);
-    curY += 7;
-  });
-
-  /* ── Signatures ── */
-  curY += 12;
-  checkNewPage(40);
-  setTxt(C.grey);
-  doc.setFont('helvetica','bold');
-  doc.setFontSize(7.5);
-  doc.text('SIGNATURES', ML, curY);
-  setFill(C.rose);
-  doc.rect(ML, curY + 1, 20, 0.5, 'F');
-  curY += 8;
-
-  var sigW = (CW - 10) / 2;
-  /* Sig 1 */
-  setFill(C.panel);
-  doc.roundedRect(ML, curY, sigW, 28, 2, 2, 'F');
-  setTxt(C.grey);
-  doc.setFont('helvetica','normal');
-  doc.setFontSize(7);
-  doc.text('Responsable inventaire', ML + sigW/2, curY + 5, {align:'center'});
-  setDraw(C.border);
-  doc.setLineWidth(0.3);
-  doc.line(ML + 6, curY + 22, ML + sigW - 6, curY + 22);
-  doc.setFontSize(6.5);
-  doc.text('Nom & signature', ML + sigW/2, curY + 27, {align:'center'});
-  /* Sig 2 */
-  setFill(C.panel);
-  doc.roundedRect(ML + sigW + 10, curY, sigW, 28, 2, 2, 'F');
-  doc.setFontSize(7);
-  doc.text('Gerante / Superviseure', ML + sigW + 10 + sigW/2, curY + 5, {align:'center'});
-  doc.setLineWidth(0.3);
-  doc.line(ML + sigW + 16, curY + 22, ML + sigW * 2 + 4, curY + 22);
-  doc.setFontSize(6.5);
-  doc.text('Nom & signature', ML + sigW + 10 + sigW/2, curY + 27, {align:'center'});
-
-  /* ── Footers sur toutes les pages ── */
-  addFooter();
-
-  /* ── Enregistrement ── */
-  var filename = ref + '_' + boutique.replace(/[^a-z0-9]/gi,'-') + '.pdf';
-  doc.save(filename);
-  showToast('📄', 'PDF genere : ' + filename);
-}
-
-/* Patch showPage pour init inventaire */
-(function(){
-  var _spOrig = showPage;
-  showPage = function(page, el) {
-    _spOrig(page, el);
-    if (page === 'inventaire') {
-      setTimeout(function() {
-        /* Nouveau numéro à chaque session d'inventaire */
-        _invCurrentRef = null;
-        renderInventaire();
-        var d = document.getElementById('inv-meta-date');
-        if (d && !d.value) d.value = new Date().toISOString().split('T')[0];
-      }, 80);
-    }
-  };
-})();
 
 </script>
 </body>
